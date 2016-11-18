@@ -1,5 +1,5 @@
 //
-//  ParttiesViewController.swift
+//  PartiesTableViewController.swift
 //  MyPartyApp
 //
 //  Created by Nora Alhelal on 11/18/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ParttiesViewController: UITableViewController {
+class PartiesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
