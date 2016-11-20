@@ -9,15 +9,33 @@
 import UIKit
 
 class PartiesTableViewController: UITableViewController {
+    
+    //MARK: Properties
+    
+   var parties = [Party]()
+    
+
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        // Load the sample data.
+        loadSampleParty()
+        
+        
+    }
+    
+    func loadSampleParty () {
+     
+        let party1 = Party(name: "Caprese Salad", date: "oct", address: "1600 S Eads")!
+        
+        let party2 = Party(name: "Chicken Salad", date: "Nov", address: "5666 S Eads")!
+        
+        let party3 = Party(name: "Meat Salad", date: "Dec", address: "43672 S Eads")!
+        
+        
+        parties += [party1, party2, party3]
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,26 +44,34 @@ class PartiesTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return parties.count
     }
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+   
 
-        // Configure the cell...
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Table view cells are reused and should be dequeued using a cell identifier.
+        let cellIdentifier = "PartyCell"
+        
+        //Because I used customized cells
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+            as! PartyTableViewCell
+        
+        // Fetches the appropriate party for the data source layout.
+        let party = parties[indexPath.row]
+     
+        cell.nameLabel.text = party.name
+        cell.dateLabel.text = party.date
+        cell.addressLabel.text = party.address
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

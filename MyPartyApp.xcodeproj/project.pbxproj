@@ -15,6 +15,8 @@
 		8881F4761DDF874200B08F79 /* PartiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881F4751DDF874200B08F79 /* PartiesTableViewController.swift */; };
 		8881F4781DDF88EC00B08F79 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881F4771DDF88EC00B08F79 /* MapViewController.swift */; };
 		8881F47A1DDF890700B08F79 /* AddPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881F4791DDF890700B08F79 /* AddPartyViewController.swift */; };
+		88B2D3F71DE15E190095BEEA /* PartyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B2D3F61DE15E190095BEEA /* PartyTableViewCell.swift */; };
+		88B2D3F91DE23A030095BEEA /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B2D3F81DE23A030095BEEA /* Party.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		8881F4751DDF874200B08F79 /* PartiesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartiesTableViewController.swift; sourceTree = "<group>"; };
 		8881F4771DDF88EC00B08F79 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8881F4791DDF890700B08F79 /* AddPartyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPartyViewController.swift; sourceTree = "<group>"; };
+		88B2D3F61DE15E190095BEEA /* PartyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyTableViewCell.swift; sourceTree = "<group>"; };
+		88B2D3F81DE23A030095BEEA /* Party.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				8881F45D1DDF7A6D00B08F79 /* AppDelegate.swift */,
 				8881F45F1DDF7A6D00B08F79 /* ViewController.swift */,
 				8881F4751DDF874200B08F79 /* PartiesTableViewController.swift */,
+				88B2D3F81DE23A030095BEEA /* Party.swift */,
+				88B2D3F61DE15E190095BEEA /* PartyTableViewCell.swift */,
 				8881F4791DDF890700B08F79 /* AddPartyViewController.swift */,
 				8881F4771DDF88EC00B08F79 /* MapViewController.swift */,
 				8881F4611DDF7A6D00B08F79 /* Main.storyboard */,
@@ -149,7 +155,9 @@
 				8881F47A1DDF890700B08F79 /* AddPartyViewController.swift in Sources */,
 				8881F4601DDF7A6D00B08F79 /* ViewController.swift in Sources */,
 				8881F45E1DDF7A6D00B08F79 /* AppDelegate.swift in Sources */,
+				88B2D3F91DE23A030095BEEA /* Party.swift in Sources */,
 				8881F4761DDF874200B08F79 /* PartiesTableViewController.swift in Sources */,
+				88B2D3F71DE15E190095BEEA /* PartyTableViewCell.swift in Sources */,
 				8881F4781DDF88EC00B08F79 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

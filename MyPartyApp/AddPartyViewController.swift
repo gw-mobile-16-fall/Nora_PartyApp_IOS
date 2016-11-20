@@ -9,7 +9,19 @@
 import UIKit
 
 class AddPartyViewController: UIViewController {
-
+    
+    // MARK: Properties
+      //Set up connections with the text fields in the story board
+    @IBOutlet weak var addNameLabel: UITextField!
+    @IBOutlet weak var addDateLabel: UITextField!
+    @IBOutlet weak var addAddressLabel: UITextField!
+    
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    var party: Party?
+    
+  
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,14 +34,24 @@ class AddPartyViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: Navigation
+    // This method lets you configure a view controller before it's presented.
+    override func prepare(for segue: UIStoryboardSegue, sender:Any?){
+        if let barButton = sender as? UIBarButtonItem {
+            if saveButton == barButton {
+                let name = addNameLabel.text ?? ""
+                let date = addDateLabel.text ?? ""
+                let address = addAddressLabel.text ?? ""
+                
+                // Set the party to be passed to PartyTabelViewContoller after the unwind segue.
+                party = Party(name: name, date: date, address: address)
+            }
+        }
     }
-    */
-
+ 
+  
+    
+    // MARK: Actions
+    
+    
 }
