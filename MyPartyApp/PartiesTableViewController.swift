@@ -8,7 +8,8 @@
 
 import UIKit
 
-class PartiesTableViewController: UITableViewController {
+class PartiesTableViewController: UITableViewController
+{
     
     //MARK: Properties
     
@@ -21,22 +22,22 @@ class PartiesTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // Load the sample data.
-        loadSampleParty()
+//        loadSampleParty()
         
         
     }
     
-    func loadSampleParty () {
-     
-        let party1 = Party(name: "Caprese Salad", date: "oct", address: "1600 S Eads")!
-        
-        let party2 = Party(name: "Chicken Salad", date: "Nov", address: "5666 S Eads")!
-        
-        let party3 = Party(name: "Meat Salad", date: "Dec", address: "43672 S Eads")!
-        
-        
-        parties += [party1, party2, party3]
-    }
+//    func loadSampleParty () {
+//     
+//        let party1 = Party(name: "Caprese Salad", date: "oct", address: "1600 S Eads")!
+//        
+//        let party2 = Party(name: "Chicken Salad", date: "Nov", address: "5666 S Eads")!
+//        
+//        let party3 = Party(name: "Meat Salad", date: "Dec", address: "43672 S Eads")!
+//        
+//        
+//        parties += [party1, party2, party3]
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -73,25 +74,27 @@ class PartiesTableViewController: UITableViewController {
     }
     
 
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+ 
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            parties.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+    
+ 
 
     /*
     // Override to support rearranging the table view.
@@ -117,5 +120,11 @@ class PartiesTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    @IBAction func unwindtoPartyTable(_ sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? AddPartyViewController, let party = sourceViewController.party {
+            let newIndexPath = IndexPath(row: parties.count, section: 0)
+            parties.append(party)
+            tableView.insertRows(at: [newIndexPath], with: .bottom)        }
+    }
+    
 }

@@ -25,17 +25,7 @@ class PartyTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-//    @IBAction func unwindToParty (sender: UIStoryboardSegue) {
-//        if let sourceViewController = sender.source as? AddPartyViewController, party = sourceViewController.party {
-    
-//    }
-//    @IBAction func unwindToPartyList(sender: UIStoryboardSegue) {
-//        if let sourceViewController = sender.sourceViewController as? AddPartyViewController, party = sourceViewController.party {
-//            // Add a new party.
-//            let newIndexPath = IndexPath(row: parties.count, section: 0)
-//            parties.append(party)
-//            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
-//        }
-//    }
+   
+
 }
+

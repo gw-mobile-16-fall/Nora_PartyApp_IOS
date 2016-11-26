@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddPartyViewController: UIViewController {
+class AddPartyViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
       //Set up connections with the text fields in the story board
@@ -17,15 +17,37 @@ class AddPartyViewController: UIViewController {
     @IBOutlet weak var addAddressLabel: UITextField!
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    
     var party: Party?
+    
     
   
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Handle the text field’s user input through delegate callbacks.
+        addNameLabel.delegate = self
+        
+        // Enable the Save button only if the text field has a valid Meal name.
+        checkValidName()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // Disable the Save button while editing.
+        saveButton.isEnabled = false
+    }
+    
+    func checkValidName() {
+        // Disable the Save button if the text field is empty.
+        let text = addNameLabel.text ?? ""
+        saveButton.isEnabled = !text.isEmpty
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        checkValidName()
+        navigationItem.title = textField.text
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,8 +57,13 @@ class AddPartyViewController: UIViewController {
     
 
     // MARK: Navigation
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+
     // This method lets you configure a view controller before it's presented.
-    override func prepare(for segue: UIStoryboardSegue, sender:Any?){
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let barButton = sender as? UIBarButtonItem {
             if saveButton == barButton {
                 let name = addNameLabel.text ?? ""
