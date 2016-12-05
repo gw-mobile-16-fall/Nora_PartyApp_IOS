@@ -11,6 +11,7 @@ import UIKit
 class PartyTableViewCell: UITableViewCell {
     
     //MARK: Properties
+
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!

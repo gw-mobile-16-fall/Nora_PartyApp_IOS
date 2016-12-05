@@ -14,19 +14,17 @@ class PartiesTableViewController: UITableViewController
     //MARK: Properties
     
    var parties = [Party]()
-    
 
-  
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Load the sample data.
+      //   Load the sample data.
 //        loadSampleParty()
         
         
     }
-    
+//    
 //    func loadSampleParty () {
 //     
 //        let party1 = Party(name: "Caprese Salad", date: "oct", address: "1600 S Eads")!
@@ -43,7 +41,7 @@ class PartiesTableViewController: UITableViewController
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -126,5 +124,5 @@ class PartiesTableViewController: UITableViewController
             parties.append(party)
             tableView.insertRows(at: [newIndexPath], with: .bottom)        }
     }
-    
+
 }
