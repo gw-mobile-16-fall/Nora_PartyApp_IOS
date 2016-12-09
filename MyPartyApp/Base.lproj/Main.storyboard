@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="77"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yEU-AY-uR2" id="YTg-wV-9vK">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="76"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="76.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="oDZ-Gn-zok">
@@ -190,10 +190,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addAddressLabel" destination="4MN-ZE-qcK" id="Laz-oQ-s2q"/>
-                        <outlet property="addDateLabel" destination="Rfq-rw-ihW" id="B5m-yR-MZU"/>
-                        <outlet property="addNameLabel" destination="4T5-ct-eQJ" id="axH-L9-Ttu"/>
+                        <outlet property="addressTextField" destination="4MN-ZE-qcK" id="K8a-h0-9Gz"/>
+                        <outlet property="nameTextField" destination="4T5-ct-eQJ" id="wmf-DA-0ph"/>
                         <outlet property="saveButton" destination="bVG-QT-iVO" id="Ofa-bb-9f6"/>
+                        <outlet property="startDateTextField" destination="Rfq-rw-ihW" id="X3U-dF-k1r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j6q-bt-oiQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

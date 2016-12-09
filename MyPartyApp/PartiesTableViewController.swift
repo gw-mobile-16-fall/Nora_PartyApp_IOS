@@ -65,7 +65,7 @@ class PartiesTableViewController: UITableViewController
         let party = parties[indexPath.row]
      
         cell.nameLabel.text = party.name
-        cell.dateLabel.text = party.date
+        cell.dateLabel.text = party.startDate
         cell.addressLabel.text = party.address
 
         return cell

@@ -12,10 +12,11 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
     
     // MARK: Properties
       //Set up connections with the text fields in the story board
-    @IBOutlet weak var addNameLabel: UITextField!
-    @IBOutlet weak var addDateLabel: UITextField!
-    @IBOutlet weak var addAddressLabel: UITextField!
+
+    @IBOutlet weak var nameTextField: UITextField!
     
+    @IBOutlet weak var startDateTextField: UITextField!
+    @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     
@@ -28,7 +29,7 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
         super.viewDidLoad()
         
         // Handle the text field’s user input through delegate callbacks.
-        addNameLabel.delegate = self
+        nameTextField.delegate = self
         
         // Enable the Save button only if the text field has a valid Meal name.
         checkValidName()
@@ -55,7 +56,7 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
     
     func checkValidName() {
         // Disable the Save button if the text field is empty.
-        let text = addNameLabel.text ?? ""
+        let text = nameTextField.text ?? ""
         saveButton.isEnabled = !text.isEmpty
     }
 
@@ -72,7 +73,7 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
         
         dateFormatter.timeStyle = DateFormatter.Style.short
         
-        addDateLabel.text = dateFormatter.string(from: sender.date)
+        startDateTextField.text = dateFormatter.string(from: sender.date)
     }
     
     // This method lets you configure a view controller before it's presented.
@@ -81,12 +82,12 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
             //     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             //        if let barButton = sender as? UIBarButtonItem {
             //            if saveButton === barButton {
-            let name = addNameLabel.text ?? ""
-            let date = addDateLabel.text ?? ""
-            let address = addAddressLabel.text ?? ""
+            let name = nameTextField.text ?? ""
+            let startDate = startDateTextField.text ?? ""
+            let address = addressTextField.text ?? ""
             
             // Set the party to be passed to PartyTabelViewContoller after the unwind segue.
-            party = Party(name: name, date: date, address: address)
+            party = Party(name: name, startDate: startDate, address: address)
         }
     }
     
