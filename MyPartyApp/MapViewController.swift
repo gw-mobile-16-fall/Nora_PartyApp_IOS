@@ -79,7 +79,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     let annotation = MKPointAnnotation()
                     let foundPlace = CLLocationCoordinate2D(latitude: coordinate!.latitude, longitude: coordinate!.longitude)
                     annotation.coordinate = foundPlace
-                    annotation.title = "Title"
                     self.mapView.addAnnotation(annotation)
             }
         })
