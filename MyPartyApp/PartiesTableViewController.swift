@@ -14,28 +14,20 @@ class PartiesTableViewController: UITableViewController
     //MARK: Properties
     
    var parties = [Party]()
-
+   let persistance = Persistance()
+    // Table view cells are reused and should be dequeued using a cell identifier.
+   let cellIdentifier = "PartyCell"
+   var addressToPass: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-      //   Load the sample data.
-//        loadSampleParty()
-        
+ 
+        _ = persistance.fetchParties() //ask proffesor what is best place
+ 
+        tableView.reloadData()
         
     }
-//    
-//    func loadSampleParty () {
-//     
-//        let party1 = Party(name: "Caprese Salad", date: "oct", address: "1600 S Eads")!
-//        
-//        let party2 = Party(name: "Chicken Salad", date: "Nov", address: "5666 S Eads")!
-//        
-//        let party3 = Party(name: "Meat Salad", date: "Dec", address: "43672 S Eads")!
-//        
-//        
-//        parties += [party1, party2, party3]
-//    }
+ 
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -54,8 +46,7 @@ class PartiesTableViewController: UITableViewController
    
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Table view cells are reused and should be dequeued using a cell identifier.
-        let cellIdentifier = "PartyCell"
+        
         
         //Because I used customized cells
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
@@ -73,51 +64,42 @@ class PartiesTableViewController: UITableViewController
     
 
     
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
- 
-
-    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+   
         if editingStyle == .delete {
             // Delete the row from the data source
             parties.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+           // tableView.reloadData()
+ 
         }    
     }
+
     
- 
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "showLocationSegue" {
+            let indexPath = tableView.indexPathForSelectedRow!
+            let cell = tableView.cellForRow(at: indexPath)! as! PartyTableViewCell
+            
+            addressToPass = cell.addressLabel.text!
+            let mapViewController = segue.destination as! MapViewController
+            
+            mapViewController.passedAddress = addressToPass
+            print("You prepare address #\(mapViewController.passedAddress)!")
+
+        }
+        else if segue.identifier == "addPartySegue" {
+        }
+        
     }
-    */
+    
+    
     @IBAction func unwindtoPartyTable(_ sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? AddPartyViewController, let party = sourceViewController.party {
             let newIndexPath = IndexPath(row: parties.count, section: 0)

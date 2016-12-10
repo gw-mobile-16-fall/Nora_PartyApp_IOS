@@ -68,7 +68,7 @@
                                     <outlet property="addressLabel" destination="2AP-zL-Q1x" id="Tmp-lL-Ho4"/>
                                     <outlet property="dateLabel" destination="ugs-jj-D1z" id="Vhh-JD-LQE"/>
                                     <outlet property="nameLabel" destination="hnJ-gA-14Y" id="E6a-Bi-tBI"/>
-                                    <segue destination="44T-vi-dg9" kind="show" id="lde-Cz-1Uv"/>
+                                    <segue destination="44T-vi-dg9" kind="show" identifier="showLocationSegue" id="lde-Cz-1Uv"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -81,7 +81,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZQa-Fq-mFb">
                             <color key="tintColor" red="1" green="0.20716898986414223" blue="0.24748190259440217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="6pN-h6-QdW" kind="show" identifier="AddParty" id="pl0-DD-iod"/>
+                                <segue destination="6pN-h6-QdW" kind="show" identifier="addPartySegue" id="pl0-DD-iod"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

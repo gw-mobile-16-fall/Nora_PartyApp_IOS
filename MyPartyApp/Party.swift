@@ -37,21 +37,21 @@ class Party: NSObject, NSCoding {
         
         super.init()
         
-        // Initialization should fail if tone of the values is empty.
-//        if name.isEmpty || date.isEmpty || address.isEmpty {
-//            return nil
-        //}
+ 
     }
 
     // MARK: NSCoding
     
     required init?(coder aDecoder: NSCoder) {
-        uuid = aDecoder.decodeObject(forKey: uuidKey) as! String
+        if let archivedUuid = aDecoder.decodeObject(forKey: "uuid") as? String {
+            uuid = archivedUuid
+        }
+        //uuid = aDecoder.decodeObject(forKey: uuidKey) as! String
         name = aDecoder.decodeObject(forKey: nameKey) as! String
         startDate = aDecoder.decodeObject(forKey: startDateKey) as! String
         address = aDecoder.decodeObject(forKey: addressKey) as! String
         
-        //self.init(name: name, date: date, address: address)
+ 
     }
     
     func encode(with aCoder: NSCoder) {

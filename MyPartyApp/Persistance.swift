@@ -11,9 +11,7 @@ import Foundation
 class Persistance {
     
     //MARK: Types
-    let nameKey = "name"
-    let dateKey = "date"
-    let addressKey = "address"
+    let partiesKey = "parties"
     
     func saveParty(party: Party) {
         let userDefaults = UserDefaults.standard
@@ -22,15 +20,13 @@ class Persistance {
         parties.append(party)
         
         let data = NSKeyedArchiver.archivedData(withRootObject: parties)
-        userDefaults.set(data, forKey: nameKey)
-        userDefaults.set(data, forKey: dateKey)
-        userDefaults.set(data, forKey: addressKey)
+        userDefaults.set(data, forKey: partiesKey)
         userDefaults.synchronize()
     }
     
     func fetchParties() -> [Party] {
         let userDefaults = UserDefaults.standard
-        let parties = userDefaults.object(forKey: nameKey) as? Data
+        let parties = userDefaults.object(forKey: partiesKey) as? Data
         
         if let parties = parties {
             return NSKeyedUnarchiver.unarchiveObject(with: parties) as! [Party]
@@ -40,6 +36,5 @@ class Persistance {
         }
     }
     
-     
     
 }

@@ -21,7 +21,8 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
     
     
     var party: Party?
-    
+    let persistance = Persistance()
+
     
   
     
@@ -37,11 +38,10 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
     
     
     // MARK: UITextFieldDelegate
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Hide the keyboard.
-        textField.resignFirstResponder()
-        return true
+ 
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // Disable the Save button while editing.
+        saveButton.isEnabled = false
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -49,10 +49,6 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
         navigationItem.title = textField.text
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // Disable the Save button while editing.
-        saveButton.isEnabled = false
-    }
     
     func checkValidName() {
         // Disable the Save button if the text field is empty.
@@ -65,16 +61,6 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
         dismiss(animated: true, completion: nil)
     }
     
-    func datePickerValueChanged(sender:UIDatePicker) {
-        
-        let dateFormatter = DateFormatter()
-        
-        dateFormatter.dateStyle = DateFormatter.Style.short
-        
-        dateFormatter.timeStyle = DateFormatter.Style.short
-        
-        startDateTextField.text = dateFormatter.string(from: sender.date)
-    }
     
     // This method lets you configure a view controller before it's presented.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -88,7 +74,19 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
             
             // Set the party to be passed to PartyTabelViewContoller after the unwind segue.
             party = Party(name: name, startDate: startDate, address: address)
+            persistance.saveParty(party: party!)
         }
+    }
+    
+    func datePickerValueChanged(sender:UIDatePicker) {
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        
+        dateFormatter.timeStyle = DateFormatter.Style.short
+        
+        startDateTextField.text = dateFormatter.string(from: sender.date)
     }
     
       // MARK: Actions
