@@ -17,6 +17,7 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
     
     @IBOutlet weak var startDateTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
+
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     
@@ -44,7 +45,8 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
     
 
     // MARK: Navigation
-    @IBAction func cancel(_ sender: UIBarButtonItem) {
+
+    @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     

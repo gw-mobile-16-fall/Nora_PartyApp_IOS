@@ -88,7 +88,8 @@ class PartiesTableViewController: UITableViewController
             let cell = tableView.cellForRow(at: indexPath)! as! PartyTableViewCell
             
             addressToPass = cell.addressLabel.text!
-            let mapViewController = segue.destination as! MapViewController
+            let navigationController = segue.destination as! UINavigationController
+            let mapViewController = navigationController.topViewController as! MapViewController
             
             mapViewController.passedAddress = addressToPass
             print("You prepare address #\(mapViewController.passedAddress)!")
