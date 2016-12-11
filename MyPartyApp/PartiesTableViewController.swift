@@ -70,7 +70,7 @@ class PartiesTableViewController: UITableViewController
         if editingStyle == .delete {
             // Delete the row from the data source
             parties.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.deleteRows(at: [indexPath], with: .fade)
            // tableView.reloadData()
  
         }    
@@ -104,7 +104,9 @@ class PartiesTableViewController: UITableViewController
         if let sourceViewController = sender.source as? AddPartyViewController, let party = sourceViewController.party {
             let newIndexPath = IndexPath(row: parties.count, section: 0)
             parties.append(party)
-            tableView.insertRows(at: [newIndexPath], with: .bottom)        }
+            tableView.insertRows(at: [newIndexPath], with: .bottom)
+            persistance.saveParty(party: party)
+        }
     }
 
 }

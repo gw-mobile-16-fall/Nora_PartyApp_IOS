@@ -33,28 +33,15 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
         nameTextField.delegate = self
         
         // Enable the Save button only if the text field has a valid Meal name.
-        checkValidName()
-    }
+     }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        <#code#>
+//    }
+    
+
+
     
     
-    // MARK: UITextFieldDelegate
- 
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // Disable the Save button while editing.
-        saveButton.isEnabled = false
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        checkValidName()
-        navigationItem.title = textField.text
-    }
-    
-    
-    func checkValidName() {
-        // Disable the Save button if the text field is empty.
-        let text = nameTextField.text ?? ""
-        saveButton.isEnabled = !text.isEmpty
-    }
 
     // MARK: Navigation
     @IBAction func cancel(_ sender: UIBarButtonItem) {
@@ -74,11 +61,11 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
             
             // Set the party to be passed to PartyTabelViewContoller after the unwind segue.
             party = Party(name: name, startDate: startDate, address: address)
-            persistance.saveParty(party: party!)
+            //persistance.saveParty(party: party!)
         }
     }
     
-    func datePickerValueChanged(sender:UIDatePicker) {
+    func datePickerValueSelected(sender:UIDatePicker) {
         
         let dateFormatter = DateFormatter()
         
@@ -98,7 +85,24 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
         
         sender.inputView = datePickerView
         
-        datePickerView.addTarget(self, action: #selector(AddPartyViewController.datePickerValueChanged), for: UIControlEvents.valueChanged)
+        datePickerView.addTarget(self, action: #selector(AddPartyViewController.datePickerValueSelected), for: UIControlEvents.valueChanged)
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "unwindtoPartyTable" {
+            if (nameTextField.text?.isEmpty)! || (startDateTextField.text?.isEmpty)! || (addressTextField.text?.isEmpty)! {
+                let alert = UIAlertController(title: "Missing Information", message: "Please Enter all Party Details", preferredStyle: .alert )
+                
+                let OKAction = UIAlertAction(title: "OK", style: .default)
+                alert.addAction(OKAction)
+                
+                self.present(alert, animated: true)
+            
+                return false
+            }
+        }else {
+            return true
+        }
+        return true
+    }
 }

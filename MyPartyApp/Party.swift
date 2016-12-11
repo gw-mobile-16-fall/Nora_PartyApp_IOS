@@ -13,7 +13,7 @@ import UIKit
 class Party: NSObject, NSCoding {
 //Use NSObject and NScoding for persistance data resons
  
-    
+ 
     
     // MARK: Properties
     var uuid: String = NSUUID().uuidString
@@ -37,22 +37,20 @@ class Party: NSObject, NSCoding {
         
         super.init()
         
- 
+
     }
 
     // MARK: NSCoding
     
     required init?(coder aDecoder: NSCoder) {
-        if let archivedUuid = aDecoder.decodeObject(forKey: "uuid") as? String {
-            uuid = archivedUuid
-        }
-        //uuid = aDecoder.decodeObject(forKey: uuidKey) as! String
+
+        uuid = aDecoder.decodeObject(forKey: uuidKey) as! String
         name = aDecoder.decodeObject(forKey: nameKey) as! String
         startDate = aDecoder.decodeObject(forKey: startDateKey) as! String
         address = aDecoder.decodeObject(forKey: addressKey) as! String
         
- 
-    }
+        //self.init(name: name, date: date, address: address)
+     }
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(uuid, forKey: uuidKey)

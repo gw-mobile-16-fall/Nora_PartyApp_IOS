@@ -10,23 +10,20 @@ import UIKit
 import MapKit
 import CoreLocation
 
-//protocol LocationFinderDelegateProtocol {
-//    func locationFound(latitude: Double, longitude: Double)
-//    func locationNotFound()
-//}
+protocol LocationFinderDelegateProtocol {
+    func locationFound(latitude: Double, longitude: Double)
+    func locationNotFound()
+}
 
 
 class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
-    
 
-    
-    
     var passedAddress: String!
-    
-    
+    let locationManager = CLLocationManager()
+    var delagate: LocationFinderDelegateProtocol?
     
     
     override func viewDidLoad() {
@@ -38,7 +35,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         addressToCoordinates(address: passedAddress)
         
         // Do any additional setup after loading the view.
-  //      locationManager.delegate = self
+//        locationManager.delegate = self
 //        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
     }
     
@@ -88,11 +85,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
 //extension MapViewController : CLLocationManagerDelegate {
 //    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        
 //        if status == .authorizedWhenInUse {
-//            locationManager.requestLocation()
+//            addressToCoordinates(address: passedAddress)
 //        }
 //        else {
-//            delegate?.locationNotFound()
+//            delagate?.locationNotFound()
 //        }
 //        
 //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -102,7 +100,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 //            print("location:: (location)")
 //        }
 //        
-//        delegate?.locationFound(latitude: coordinate.latitude, longitude: locations.longitude)
+//        delagate?.locationFound(latitude: coordinate!.latitude, longitude: coordinate!.longitude)
 //    }
 //    
 //    
@@ -111,5 +109,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 //    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
 //        print(error.localizedDescription)
 //        
-//        delegate?.locationNotFound()
+//        delagate?.locationNotFound()
 //    }
+//}

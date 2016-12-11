@@ -81,7 +81,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZQa-Fq-mFb">
                             <color key="tintColor" red="1" green="0.20716898986414223" blue="0.24748190259440217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="6pN-h6-QdW" kind="show" identifier="addPartySegue" id="pl0-DD-iod"/>
+                                <segue destination="6pN-h6-QdW" kind="presentation" identifier="addPartySegue" id="pl0-DD-iod"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -170,8 +170,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="bVG-QT-iVO">
                             <connections>
-                                <action selector="unwindtoparty:" destination="mg1-lo-2gp" id="m4P-nT-0fp"/>
-                                <segue destination="FdL-lZ-kd3" kind="unwind" unwindAction="unwindtoPartyTable:" id="dVn-eN-mzH"/>
+                                <segue destination="FdL-lZ-kd3" kind="unwind" identifier="unwindtoPartyTable" unwindAction="unwindtoPartyTable:" id="dVn-eN-mzH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

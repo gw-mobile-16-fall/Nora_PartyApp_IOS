@@ -36,5 +36,14 @@ class Persistance {
         }
     }
     
+//    func deleteParty() -> [Party] {
+//        let userDefaults = UserDefaults.standard
+//        let parties = userDefaults.object(forKey: partiesKey) as? Data
+//        UserDefaults.removeObject(forKey: partiesKey)
+//        parties.remove(at: indexPath.row)
+//        tableView.deleteRows(at: [indexPath], with: .automatic)
+//        
+//    }
+    
     
 }
