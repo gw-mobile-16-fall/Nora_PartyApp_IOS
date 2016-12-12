@@ -31,6 +31,17 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
         nameTextField.delegate = self
              }
 
+    // MARK: UITextFieldDelegate
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        //Hide the keyboard unless a textfield is selected
+        textField.resignFirstResponder()
+        return true
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //hide the keyboard when user touch anywhare but the texfields
+        self.view.endEditing(true)
+    }
 
 
     // MARK: Navigation
@@ -63,12 +74,9 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
       // MARK: Actions
     //When the datepicker value changed, show the choosen date on the label
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
+        
         let dateFormatter = DateFormatter()
-        
-        dateFormatter.dateStyle = DateFormatter.Style.short
-        
-        dateFormatter.timeStyle = DateFormatter.Style.short
-        
+        dateFormatter.dateFormat = "MM/dd 'at' h:mm a"
         startDateLabelView.text = dateFormatter.string(from: sender.date)
     }
     
