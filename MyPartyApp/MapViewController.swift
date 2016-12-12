@@ -22,6 +22,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
 
         mapView.delegate = self
         //send the recived address string to the addressToCoordinates function
@@ -49,15 +50,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     let span = MKCoordinateSpanMake(0.02, 0.02)
                     //to define which portion of the map to display
                     let region = MKCoordinateRegion(center: (location?.coordinate)!, span: span)
+                
                     self.mapView.setRegion(region, animated: true)
                     //To set a pin on the found location
                     let annotation = MKPointAnnotation()
                     let foundPlace = CLLocationCoordinate2D(latitude: coordinate!.latitude, longitude: coordinate!.longitude)
                     annotation.coordinate = foundPlace
                     self.mapView.addAnnotation(annotation)
+                
             }
         })
     }
 }
-
- 

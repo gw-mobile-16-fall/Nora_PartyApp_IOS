@@ -15,8 +15,9 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var startDateLabelView: UILabel!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     
     var party: Party?
@@ -34,10 +35,10 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
 
     // MARK: Navigation
     //Cancel the AddPartyView when clicked
-    @IBAction func cancel(_ sender: UIBarButtonItem) {
+
+    @IBAction func cancelButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-
     
     
     // This method lets you configure a view controller before it's presented.

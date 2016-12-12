@@ -53,7 +53,7 @@ class PartiesTableViewController: UITableViewController {
         cell.nameLabel.text = party.name
         cell.addressLabel.text = party.address
        
-        //fetch the date and formatt it using DateFormatter
+        //fetch the date and format it using DateFormatter
         let datetoConvert = party.startDate
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd 'at' h:mm a"
@@ -81,7 +81,7 @@ class PartiesTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
+    
         // Pass the selected object to the new view controller.
         //Beased on the segue destination
         if segue.identifier == "showLocationSegue" {
