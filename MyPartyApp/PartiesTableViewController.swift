@@ -109,7 +109,7 @@ class PartiesTableViewController: UITableViewController {
             let newIndexPath = IndexPath(row: parties.count, section: 0)
             parties.append(party)
             tableView.insertRows(at: [newIndexPath], with: .bottom)
-            //persistance.saveParty(party: party)
+         
         }
     }
 

@@ -65,7 +65,7 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
             // Set the party to be passed to PartyTabelViewContoller after the unwind segue.
             
             party = Party(id: id, name: name, startDate: startDate, address: address)
-            //persistance.saveParty(party: party!)
+            persistance.saveParty(party: party!)
         }
     }
     
