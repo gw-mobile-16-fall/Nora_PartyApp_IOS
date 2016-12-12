@@ -10,69 +10,47 @@ import UIKit
 import MapKit
 import CoreLocation
 
-protocol LocationFinderDelegateProtocol {
-    func locationFound(latitude: Double, longitude: Double)
-    func locationNotFound()
-}
+ 
 
 
 class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
-    
-
+    //The address string that has been passed from PartiesTabelViewController
     var passedAddress: String!
-    let locationManager = CLLocationManager()
-    var delagate: LocationFinderDelegateProtocol?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("You recived address #\(passedAddress)!")
 
         mapView.delegate = self
+        //send the recived address string to the addressToCoordinates function
         addressToCoordinates(address: passedAddress)
         
-        // Do any additional setup after loading the view.
-//        locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
     }
     
-    // MARK: - MKMapView delegate
-    
-
-    
-//    func mapViewWillStartLoadingMap(_ mapView: MKMapView) {
-//        NSLog("mapViewWillStartLoadingMap")
-//    }
-//        
-//    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
-//        NSLog("mapViewDidFinishLoadingMap")
-//    }
-//        
-//    func mapViewDidStopLocatingUser(_ mapView: MKMapView) {
-//        NSLog("mapViewDidStopLocatingUser")
-//    }
-    
+ 
+    //To convert the Address String to coordinates
     func addressToCoordinates (address: String) {
         let geocoder = CLGeocoder()
+        //gecode the input address
         geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) in
             if error != nil {
                 print(error!)
                 return }
                // else
             if (placemarks?.count)! > 0 {
- 
+                //see what placemark was found and get the first result
                 let placemark = placemarks?[0]
                 let location = placemark?.location
+                //get the coordinates
                 let coordinate = location?.coordinate
-                print("\nlat: \(coordinate!.latitude), long: \(coordinate!.longitude)")
- 
+                    //The amount of to use for the span
                     let span = MKCoordinateSpanMake(0.02, 0.02)
+                    //to define which portion of the map to display
                     let region = MKCoordinateRegion(center: (location?.coordinate)!, span: span)
-  
                     self.mapView.setRegion(region, animated: true)
+                    //To set a pin on the found location
                     let annotation = MKPointAnnotation()
                     let foundPlace = CLLocationCoordinate2D(latitude: coordinate!.latitude, longitude: coordinate!.longitude)
                     annotation.coordinate = foundPlace
@@ -82,33 +60,4 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
 }
 
-
-//extension MapViewController : CLLocationManagerDelegate {
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        
-//        if status == .authorizedWhenInUse {
-//            addressToCoordinates(address: passedAddress)
-//        }
-//        else {
-//            delagate?.locationNotFound()
-//        }
-//        
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        
-//       // if let coordinate = locations[0].coordinate
-//        if let location = locations.first {
-//            print("location:: (location)")
-//        }
-//        
-//        delagate?.locationFound(latitude: coordinate!.latitude, longitude: coordinate!.longitude)
-//    }
-//    
-//    
-//    }
-//    
-//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//        print(error.localizedDescription)
-//        
-//        delagate?.locationNotFound()
-//    }
-//}
+ 

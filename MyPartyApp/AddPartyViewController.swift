@@ -12,87 +12,71 @@ class AddPartyViewController: UIViewController, UITextFieldDelegate, UINavigatio
     
     // MARK: Properties
       //Set up connections with the text fields in the story board
-
     @IBOutlet weak var nameTextField: UITextField!
-    
-    @IBOutlet weak var startDateTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
-
+    @IBOutlet weak var startDateLabelView: UILabel!
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     var party: Party?
     let persistance = Persistance()
 
-    
-  
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Handle the text field’s user input through delegate callbacks.
         nameTextField.delegate = self
-        
-        // Enable the Save button only if the text field has a valid Meal name.
-     }
-//    override func viewWillDisappear(_ animated: Bool) {
-//        <#code#>
-//    }
-    
+             }
 
 
-    
-    
 
     // MARK: Navigation
-
-    @IBAction func cancel(_ sender: Any) {
+    //Cancel the AddPartyView when clicked
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
+
     
     
     // This method lets you configure a view controller before it's presented.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (saveButton === sender as AnyObject)  {
-            //     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            //        if let barButton = sender as? UIBarButtonItem {
-            //            if saveButton === barButton {
+
+            let id = UUID().uuidString
             let name = nameTextField.text ?? ""
-            let startDate = startDateTextField.text ?? ""
+            let startDate = datePicker.date
             let address = addressTextField.text ?? ""
             
+
             // Set the party to be passed to PartyTabelViewContoller after the unwind segue.
-            party = Party(name: name, startDate: startDate, address: address)
+            
+            party = Party(id: id, name: name, startDate: startDate, address: address)
             //persistance.saveParty(party: party!)
         }
     }
     
-    func datePickerValueSelected(sender:UIDatePicker) {
-        
+
+    
+      // MARK: Actions
+    //When the datepicker value changed, show the choosen date on the label
+    @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
         let dateFormatter = DateFormatter()
         
         dateFormatter.dateStyle = DateFormatter.Style.short
         
         dateFormatter.timeStyle = DateFormatter.Style.short
         
-        startDateTextField.text = dateFormatter.string(from: sender.date)
+        startDateLabelView.text = dateFormatter.string(from: sender.date)
     }
     
-      // MARK: Actions
+
     
-    @IBAction func startDatePicker(_ sender: UITextField) {
-        let datePickerView:UIDatePicker = UIDatePicker()
-        
-        datePickerView.datePickerMode = UIDatePickerMode.dateAndTime
-        
-        sender.inputView = datePickerView
-        
-        datePickerView.addTarget(self, action: #selector(AddPartyViewController.datePickerValueSelected), for: UIControlEvents.valueChanged)
-    }
-    
+    //To handel empty text fields of Name and Address
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "unwindtoPartyTable" {
-            if (nameTextField.text?.isEmpty)! || (startDateTextField.text?.isEmpty)! || (addressTextField.text?.isEmpty)! {
+            if (nameTextField.text?.isEmpty)! || (addressTextField.text?.isEmpty)! {
                 let alert = UIAlertController(title: "Missing Information", message: "Please Enter all Party Details", preferredStyle: .alert )
                 
                 let OKAction = UIAlertAction(title: "OK", style: .default)

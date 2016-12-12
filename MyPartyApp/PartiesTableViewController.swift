@@ -8,32 +8,28 @@
 
 import UIKit
 
-class PartiesTableViewController: UITableViewController
-{
+class PartiesTableViewController: UITableViewController {
     
     //MARK: Properties
-    
    var parties = [Party]()
    let persistance = Persistance()
-    // Table view cells are reused and should be dequeued using a cell identifier.
+    // For table view cells to be dequeued using a cell identifier.
    let cellIdentifier = "PartyCell"
+    //The address String to be sent to MapView
    var addressToPass: String!
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
  
-        _ = persistance.fetchParties() //ask proffesor what is best place
- 
-        tableView.reloadData()
+        tableView.delegate = self
+       tableView.reloadData()
         
     }
  
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -47,18 +43,23 @@ class PartiesTableViewController: UITableViewController
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         //Because I used customized cells
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             as! PartyTableViewCell
         
-        // Fetches the appropriate party for the data source layout.
+        // Fetches the party for the cell.
         let party = parties[indexPath.row]
-     
+        
         cell.nameLabel.text = party.name
-        cell.dateLabel.text = party.startDate
         cell.addressLabel.text = party.address
-
+       
+        //fetch the date and formatt it using DateFormatter
+        let datetoConvert = party.startDate
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd 'at' h:mm a"
+        cell.dateLabel.text = dateFormatter.string(from: datetoConvert)
+ 
+  
         return cell
     }
     
@@ -71,8 +72,7 @@ class PartiesTableViewController: UITableViewController
             // Delete the row from the data source
             parties.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-           // tableView.reloadData()
- 
+  
         }    
     }
 
@@ -83,19 +83,21 @@ class PartiesTableViewController: UITableViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        //Beased on the segue destination
         if segue.identifier == "showLocationSegue" {
+            // as I want the address string of the selected row to be passed to MapViewController
             let indexPath = tableView.indexPathForSelectedRow!
             let cell = tableView.cellForRow(at: indexPath)! as! PartyTableViewCell
-            
             addressToPass = cell.addressLabel.text!
+            //Becuase the MapViewController is embaded in UINavigationController
             let navigationController = segue.destination as! UINavigationController
             let mapViewController = navigationController.topViewController as! MapViewController
-            
+            //Pass the address string
             mapViewController.passedAddress = addressToPass
-            print("You prepare address #\(mapViewController.passedAddress)!")
 
         }
         else if segue.identifier == "addPartySegue" {
+            //do nothing
         }
         
     }
@@ -106,7 +108,7 @@ class PartiesTableViewController: UITableViewController
             let newIndexPath = IndexPath(row: parties.count, section: 0)
             parties.append(party)
             tableView.insertRows(at: [newIndexPath], with: .bottom)
-            persistance.saveParty(party: party)
+            //persistance.saveParty(party: party)
         }
     }
 

@@ -13,6 +13,7 @@ class Persistance {
     //MARK: Types
     let partiesKey = "parties"
     
+    //To save the new addded parties
     func saveParty(party: Party) {
         let userDefaults = UserDefaults.standard
         
@@ -24,6 +25,7 @@ class Persistance {
         userDefaults.synchronize()
     }
     
+    //Fetch the parties
     func fetchParties() -> [Party] {
         let userDefaults = UserDefaults.standard
         let parties = userDefaults.object(forKey: partiesKey) as? Data
@@ -36,14 +38,6 @@ class Persistance {
         }
     }
     
-//    func deleteParty() -> [Party] {
-//        let userDefaults = UserDefaults.standard
-//        let parties = userDefaults.object(forKey: partiesKey) as? Data
-//        UserDefaults.removeObject(forKey: partiesKey)
-//        parties.remove(at: indexPath.row)
-//        tableView.deleteRows(at: [indexPath], with: .automatic)
-//        
-//    }
     
     
 }
